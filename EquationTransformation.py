@@ -24,19 +24,19 @@ class EquationTransformation(Scene):
             # Add "m constant" if the current equation matches
             if text == eq_data[0][1]:
                 note = MathTex("P = mv").set_color(BLUE)
-                note.next_to(eq, DOWN)
+                note.next_to(eq, RIGHT)
                 self.play(Write(note))
                 self.wait(1)
                 self.play(FadeOut(note),TransformMatchingShapes(eq, new_equation))
             if text == eq_data[0][2]:
                 note = Text("m konstan", font_size=30, color=BLUE)
-                note.next_to(eq, DOWN, buff=SMALL_BUFF)
+                note.next_to(eq, RIGHT, buff=SMALL_BUFF)
                 self.play(Write(note))
                 self.wait(1)
                 self.play(FadeOut(note),TransformMatchingShapes(eq, new_equation))
             elif text == eq_data[0][3]:
                 note = MathTex("a = \\frac{dv}{dt}").set_color(BLUE)
-                note.next_to(eq, DOWN)
+                note.next_to(eq, RIGHT)
                 self.play(Write(note))
                 self.wait(1)
                 self.play(FadeOut(note),TransformMatchingShapes(eq, new_equation))
