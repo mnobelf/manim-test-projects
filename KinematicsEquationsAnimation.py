@@ -29,6 +29,7 @@ class KinematicsDerivations(Scene):
             MathTex("v^2 = v_0^2+2a(x-x_0)", font_size=60),
         ]
         notes = [MathTex("t_0 = 0", font_size=40, color=BLUE), MathTex("v = v_0 + at", font_size=40, color=BLUE),MathTex("v = \\frac{dx}{dt}", font_size=40, color=BLUE)]
+        self.play(Write(eqs[0]))
         notes[0].shift(DOWN)
         notes[1].shift(DOWN)
         notes[2].shift(RIGHT*3)
