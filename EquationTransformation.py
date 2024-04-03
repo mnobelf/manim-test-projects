@@ -16,7 +16,6 @@ class EquationTransformation(Scene):
         pmv = MathTex("P = mv").set_color(BLUE)
         pmv.next_to(equation1, DOWN)
         self.play(Write(pmv))
-        self.wait(0.5)
         self.play(FadeOut(pmv))
 
         # Transform the equation into F = ma
@@ -31,10 +30,15 @@ class EquationTransformation(Scene):
 
             # Add "m constant" if the current equation matches
             if text == eq_data[0][1]:
-                m_constant = MathTex("m"," ","konstan").set_color(BLUE)
-                m_constant.next_to(eq, DOWN)
-                self.play(Write(m_constant))
-                self.wait(0.5)
-                self.play(FadeOut(m_constant))
+                note = Text("m konstan", font_size=30, color=BLUE)
+                note.next_to(eq, DOWN, buff=SMALL_BUFF)
+                self.play(Write(note))
+                self.play(FadeOut(note))
+
+            elif text == eq_data[0][2]:
+                note = MathTex("a = \\frac{dv}{dt}").set_color(BLUE)
+                note.next_to(eq, DOWN)
+                self.play(Write(note))
+                self.play(FadeOut(note))
 
             self.wait(1)
