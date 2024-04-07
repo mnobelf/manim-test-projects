@@ -13,8 +13,8 @@ class PerpendicularGraphs(Scene):
         labels = axes.get_axis_labels()
 
         # Define the functions
-        func1 = lambda x: x
-        func2 = lambda x: -x
+        func1 = lambda x: 2*x - 3
+        func2 = lambda x: -0.5*x + 5
 
         # Create the graphs
         graph1 = axes.plot(func1, color = BLUE)
