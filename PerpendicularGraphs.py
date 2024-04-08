@@ -17,8 +17,8 @@ class PerpendicularGraphs(Scene):
         func2 = lambda x: -0.5*x + 5
 
         # Create the graphs
-        graph1 = axes.plot(func1, color = BLUE)
-        graph2 = axes.plot(func2, color = RED)
+        graph1 = axes.plot(func1, x_range=[0.5,9], color = BLUE)
+        graph2 = axes.plot(func2, x_range=[-1,12], color = RED)
 
         # Set the colors
         graph1.set_color(BLUE)
@@ -39,7 +39,7 @@ class PerpendicularGraphs(Scene):
 
 
         # Create the horizontal line
-        horizontal_line = DashedLine(start=axes.c2p(x_intersection - 10, y_intersection), end=axes.c2p(x_intersection + 10, y_intersection))
+        horizontal_line = DashedLine(start=axes.c2p(x_intersection - 10, y_intersection), end=axes.c2p(x_intersection + 10, y_intersection), dashed_ratio=0.3)
 
         label_vector1 = MathTex("\\vec{A}").next_to(vector1, UP).shift(DOWN*2+LEFT*0.3).set_color(YELLOW)
         label_vector2 = MathTex("\\vec{B}").next_to(vector2, DOWN).shift(UP*1.5+LEFT*0.8).set_color(GREEN)
@@ -54,14 +54,16 @@ class PerpendicularGraphs(Scene):
 
         # Create the x and y components of each vector
         vector1_x = Arrow(intersection_point, axes.c2p(x_intersection + 4, y_intersection), buff=0, stroke_width=3)
-        vector1_y = Arrow(intersection_point, axes.c2p(x_intersection + 4, func1(x_intersection + 4)), buff=0, stroke_width=3)
+        vector1_y = Arrow(axes.c2p(x_intersection + 4, y_intersection), axes.c2p(x_intersection + 4, func1(x_intersection + 4)), buff=0, stroke_width=3)
         vector2_x = Arrow(intersection_point, axes.c2p(x_intersection + 8, y_intersection), buff=0, stroke_width=3)
-        vector2_y = Arrow(intersection_point, axes.c2p(x_intersection + 8, func2(x_intersection + 8)), buff=0, stroke_width=3)
+        vector2_y = Arrow(axes.c2p(x_intersection + 8, y_intersection), axes.c2p(x_intersection + 8, func2(x_intersection + 8)), buff=0, stroke_width=3)
 
         vector1_x.set_color(YELLOW)
         vector1_y.set_color(YELLOW)
         vector2_x.set_color(GREEN)
         vector2_y.set_color(GREEN)
+
+        vector1_y.shift(RIGHT*0.1)
 
         self.play(Create(axes))
         self.play(Create(graph1))
