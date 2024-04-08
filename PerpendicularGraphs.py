@@ -3,10 +3,10 @@ from manim import *
 class PerpendicularGraphs(Scene):
     def construct(self):
         axes = Axes(
-            x_range=[-1, 10, 1],
+            x_range=[-1, 15, 1],
             y_range=[-1, 10, 1],
             x_length=10,
-            y_length=10,
+            y_length=6.66666666667,
             axis_config={"include_tip": True},
         )
 
@@ -30,8 +30,8 @@ class PerpendicularGraphs(Scene):
         intersection_point = axes.c2p(x_intersection, y_intersection)
 
         # Create the vectors
-        vector1 = Arrow(intersection_point, axes.c2p(x_intersection + 2, func1(x_intersection + 2)), buff=0)
-        vector2 = Arrow(intersection_point, axes.c2p(x_intersection + 4, func2(x_intersection + 4)), buff=0)
+        vector1 = Arrow(intersection_point, axes.c2p(x_intersection + 4, func1(x_intersection + 4)), buff=0)
+        vector2 = Arrow(intersection_point, axes.c2p(x_intersection + 8, func2(x_intersection + 8)), buff=0)
 
         # Set the colors
         vector1.set_color(YELLOW)
@@ -41,28 +41,36 @@ class PerpendicularGraphs(Scene):
         # Create the horizontal line
         horizontal_line = DashedLine(start=axes.c2p(x_intersection - 10, y_intersection), end=axes.c2p(x_intersection + 10, y_intersection))
 
+        label_vector1 = MathTex("\\vec{A}").next_to(vector1, UP)
+        label_vector2 = MathTex("\\vec{B}").next_to(vector2, DOWN)
+
         # Create the angle indicators
         angle_alpha = Angle(horizontal_line, vector1, radius=1, other_angle=False)
-        angle_beta = Angle(horizontal_line, vector2, radius=1, other_angle=True)
+        angle_beta = Angle(horizontal_line, vector2, radius=1.5, other_angle=True)
 
         # Add labels for the angles
         label_alpha = MathTex("\\alpha").next_to(angle_alpha, RIGHT).shift(UP*0.1)
         label_beta = MathTex("\\beta").next_to(angle_beta, RIGHT).shift(DOWN*0.1)
 
         # Create the x and y components of each vector
-        vector1_x = Arrow(intersection_point, axes.c2p(x_intersection + 2, y_intersection), buff=0)
-        vector1_y = Arrow(intersection_point, axes.c2p(x_intersection, func1(x_intersection + 2)), buff=0)
-        vector2_x = Arrow(intersection_point, axes.c2p(x_intersection + 4, y_intersection), buff=0)
-        vector2_y = Arrow(intersection_point, axes.c2p(x_intersection, func2(x_intersection + 4)), buff=0)
+        vector1_x = Arrow(intersection_point, axes.c2p(x_intersection + 4, y_intersection), buff=0, stroke_width=3)
+        vector1_y = Arrow(intersection_point, axes.c2p(x_intersection, func1(x_intersection + 4)), buff=0, stroke_width=3)
+        vector2_x = Arrow(intersection_point, axes.c2p(x_intersection + 8, y_intersection), buff=0, stroke_width=3)
+        vector2_y = Arrow(intersection_point, axes.c2p(x_intersection, func2(x_intersection + 8)), buff=0, stroke_width=3)
+
+        vector1_x.set_color(YELLOW)
+        vector1_y.set_color(YELLOW)
+        vector2_x.set_color(GREEN)
+        vector2_y.set_color(GREEN)
 
         self.play(Create(axes))
         self.play(Create(graph1))
         self.play(Create(graph2))
-        self.play(Create(vector1))
-        self.play(Create(vector2))
+        self.play(Create(vector1), Write(label_vector1))
+        self.play(Create(vector2), Write(label_vector2))
         self.play(Create(horizontal_line))
         self.play(Create(angle_alpha), Write(label_alpha))
         self.play(Create(angle_beta), Write(label_beta))
-        self.play(Create(vector1_x), Create(vector1_y))
         self.play(Create(vector2_x), Create(vector2_y))
+        self.play(Create(vector1_x), Create(vector1_y))
         self.wait(3)
