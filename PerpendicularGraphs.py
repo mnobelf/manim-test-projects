@@ -4,9 +4,9 @@ class PerpendicularGraphs(Scene):
     def construct(self):
         axes = Axes(
             x_range=[-1, 15, 1],
-            y_range=[-1, 10, 1],
-            x_length=10,
-            y_length=6.66666666667,
+            y_range=[-1, 15, 1],
+            x_length=9,
+            y_length=9,
             axis_config={"include_tip": True},
         )
 
@@ -41,22 +41,22 @@ class PerpendicularGraphs(Scene):
         # Create the horizontal line
         horizontal_line = DashedLine(start=axes.c2p(x_intersection - 10, y_intersection), end=axes.c2p(x_intersection + 10, y_intersection))
 
-        label_vector1 = MathTex("\\vec{A}").next_to(vector1, UP)
-        label_vector2 = MathTex("\\vec{B}").next_to(vector2, DOWN)
+        label_vector1 = MathTex("\\vec{A}").next_to(vector1, UP).shift(DOWN*2+LEFT*0.3).set_color(YELLOW)
+        label_vector2 = MathTex("\\vec{B}").next_to(vector2, DOWN).shift(UP*1.5+LEFT*0.8).set_color(GREEN)
 
         # Create the angle indicators
         angle_alpha = Angle(horizontal_line, vector1, radius=1, other_angle=False)
         angle_beta = Angle(horizontal_line, vector2, radius=1.5, other_angle=True)
 
         # Add labels for the angles
-        label_alpha = MathTex("\\alpha").next_to(angle_alpha, RIGHT).shift(UP*0.1)
+        label_alpha = MathTex("\\alpha").next_to(angle_alpha, RIGHT).shift(UP*0.2+LEFT*0.3)
         label_beta = MathTex("\\beta").next_to(angle_beta, RIGHT).shift(DOWN*0.1)
 
         # Create the x and y components of each vector
         vector1_x = Arrow(intersection_point, axes.c2p(x_intersection + 4, y_intersection), buff=0, stroke_width=3)
-        vector1_y = Arrow(intersection_point, axes.c2p(x_intersection, func1(x_intersection + 4)), buff=0, stroke_width=3)
+        vector1_y = Arrow(intersection_point, axes.c2p(x_intersection + 4, func1(x_intersection + 4)), buff=0, stroke_width=3)
         vector2_x = Arrow(intersection_point, axes.c2p(x_intersection + 8, y_intersection), buff=0, stroke_width=3)
-        vector2_y = Arrow(intersection_point, axes.c2p(x_intersection, func2(x_intersection + 8)), buff=0, stroke_width=3)
+        vector2_y = Arrow(intersection_point, axes.c2p(x_intersection + 8, func2(x_intersection + 8)), buff=0, stroke_width=3)
 
         vector1_x.set_color(YELLOW)
         vector1_y.set_color(YELLOW)
