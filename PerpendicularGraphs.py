@@ -3,8 +3,8 @@ from manim import *
 class PerpendicularGraphs(Scene):
     def construct(self):
         axes = Axes(
-            x_range=[-10, 10, 1],
-            y_range=[-10, 10, 1],
+            x_range=[-1, 10, 1],
+            y_range=[-1, 10, 1],
             x_length=10,
             y_length=10,
             axis_config={"include_tip": True},
@@ -49,6 +49,12 @@ class PerpendicularGraphs(Scene):
         label_alpha = MathTex("\\alpha").next_to(angle_alpha, RIGHT).shift(UP*0.1)
         label_beta = MathTex("\\beta").next_to(angle_beta, RIGHT).shift(DOWN*0.1)
 
+        # Create the x and y components of each vector
+        vector1_x = Arrow(intersection_point, axes.c2p(x_intersection + 2, y_intersection), buff=0)
+        vector1_y = Arrow(intersection_point, axes.c2p(x_intersection, func1(x_intersection + 2)), buff=0)
+        vector2_x = Arrow(intersection_point, axes.c2p(x_intersection + 4, y_intersection), buff=0)
+        vector2_y = Arrow(intersection_point, axes.c2p(x_intersection, func2(x_intersection + 4)), buff=0)
+
         self.play(Create(axes))
         self.play(Create(graph1))
         self.play(Create(graph2))
@@ -57,4 +63,6 @@ class PerpendicularGraphs(Scene):
         self.play(Create(horizontal_line))
         self.play(Create(angle_alpha), Write(label_alpha))
         self.play(Create(angle_beta), Write(label_beta))
+        self.play(Create(vector1_x), Create(vector1_y))
+        self.play(Create(vector2_x), Create(vector2_y))
         self.wait(3)
